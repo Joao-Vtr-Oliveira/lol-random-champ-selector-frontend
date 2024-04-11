@@ -14,7 +14,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return(
-    <Box w={'100%'} h='50px' display='flex' justifyContent='space-around' alignItems='center' textColor='black' bg='white'>
+    <Box w={'100%'} className='h-1/6' display='flex' justifyContent='space-around' alignItems='center' textColor='black' bg='white'>
       <Link href={'/'}>
         <Icon boxSize={8} color={verifyRoute(pathname, '/') ? '#FA2083' : 'black'} _hover={verifyRoute(pathname, '/') ? {} : hoverBtn} as={IoHome} />
       </Link>
