@@ -218,7 +218,7 @@ const NewChampion = () => {
 
 					<Box display='flex' justifyContent='center'>
 						<Button onClick={fetchAddChampion} colorScheme='green'>
-							Search
+							Add champion
 						</Button>
 					</Box>
 				</Box>
