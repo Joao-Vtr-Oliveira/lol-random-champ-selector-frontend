@@ -36,7 +36,7 @@ const HomeComponent = () => {
 				mb={10}
 			>
 				{data?.result.map((champ) => (
-          <GridItem>
+          <GridItem key={champ.nameBase}>
             <ChampionCard champion={champ} />
           </GridItem>
 				))}
