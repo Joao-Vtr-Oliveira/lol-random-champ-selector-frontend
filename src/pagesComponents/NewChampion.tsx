@@ -1,6 +1,7 @@
 'use client';
 
 import { addChampion } from '@/requests/script';
+import toastHelper from '@/utils/toastHelper';
 import {
 	Box,
 	Button,
@@ -32,33 +33,9 @@ const NewChampion = () => {
 	const toast = useToast();
 
 	const checkFields = () => {
-		if (!name || !nameBase) {
-			return toast({
-				title: 'Name field not filled',
-				description: 'Please, write the name and base name',
-				status: 'error',
-				duration: 5000,
-				isClosable: true,
-			});
-		}
-		if (!top && !jg && !mid && !adc && !sup) {
-			return toast({
-				title: 'Role not selected',
-				description: 'Please, select at least one role',
-				status: 'error',
-				duration: 5000,
-				isClosable: true,
-			});
-		}
-		if (!ad && !ap && !tank) {
-			return toast({
-				title: 'Damage type not selected',
-				description: 'Please, select at least one damage type',
-				status: 'error',
-				duration: 5000,
-				isClosable: true,
-			});
-		}
+		if (!name || !nameBase) return toast(toastHelper('name'));
+		if (!top && !jg && !mid && !adc && !sup) return toast(toastHelper('role'));
+		if (!ad && !ap && !tank) return toast(toastHelper('type'));
 		return true;
 	};
 
@@ -78,31 +55,10 @@ const NewChampion = () => {
 				tank,
 				ranged,
 			});
-			console.log(data);
-			if (data.status !== 'OK') {
-        return toast({
-					title: 'Error!',
-					description: 'The champion already exists in the DB',
-					status: 'error',
-					duration: 5000,
-					isClosable: true,
-				});
-      }
-				return toast({
-					title: 'Sucess!',
-					description: 'Champion added with sucess',
-					status: 'success',
-					duration: 5000,
-					isClosable: true,
-				});
+			if (data.status !== 'OK') return toast(toastHelper('alreadyExists'));
+			return toast(toastHelper('championAdded'));
 		} catch (error) {
-			toast({
-				title: 'Error!',
-				description: 'An error ocurred',
-				status: 'error',
-				duration: 5000,
-				isClosable: true,
-			});
+			toast(toastHelper('error'));
 		}
 	};
 
