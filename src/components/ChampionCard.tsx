@@ -13,9 +13,14 @@ const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {
 	return (
 		<Card display={'flex'} mb={10} flexDirection={'column'}>
 			<CardHeader textAlign='center'>
+        {champion.nameBase !== '-' &&
         <Link target='_blank' href={`https://www.leagueofgraphs.com/champions/builds/${champion.nameBase}`}>
 				  <Heading fontSize='2xl' color='#570FA0' _hover={{'textDecoration': 'underline'}}>{champion.name}</Heading>
         </Link>
+        }
+        {champion.nameBase === '-' &&
+				  <Heading fontSize='2xl' color='#570FA0'>{champion.name}</Heading>
+        }
 			</CardHeader>
 			<CardBody>
 				<Box fontWeight='bold' textAlign='center'>Roles: {roles.join(', ')}</Box>
@@ -24,9 +29,11 @@ const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {
 			</CardBody>
       <CardFooter>
         <Box margin='auto'>
+          {champion.nameBase !== '-' &&
           <Link href={`/champion/${champion.nameBase}`}>
             <Button colorScheme='yellow'>Edit</Button>
           </Link>
+          }
         </Box>
       </CardFooter>
 		</Card>
