@@ -1,4 +1,4 @@
-import { AllChampionsReturn } from '@/types/championReturn';
+import { AllChampionsReturn, ChampionReturn } from '@/types/championReturn';
 
 export const ping = async () => {
   try {
@@ -17,6 +17,37 @@ export const getAllChampions = async () => {
     const data = await response.json();
     return data as AllChampionsReturn;
   } catch (error) {
-    throw new Error(`Deu treta: ${error}`)
+    throw new Error(`Deu treta: ${error}`);
+  }
+}
+
+export const getRandomChampion = async ({
+  role,
+  type,
+  range,
+}: {
+  role?: string;
+  type?: string;
+  range?: string;
+}): Promise<ChampionReturn | null> => {
+  try {
+    const formData = new URLSearchParams();
+    if(role) formData.append('role', role);
+    if(type) formData.append('type', type);
+    if(range) formData.append('ranged', range === 'ranged' ? 'true' : 'false');
+    
+    const response = await fetch('http://localhost:80/getRandomChampion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData,
+    });
+    const data: AllChampionsReturn = await response.json();
+    if(data.result.length === 0) throw new Error('Champion not found');
+    return data.result[0] as ChampionReturn;
+  } catch(error) {
+    console.log(`Error: `, error);
+    throw new Error('An error ocurred');
   }
 }
