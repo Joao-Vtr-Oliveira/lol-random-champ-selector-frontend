@@ -1,4 +1,4 @@
-import { AllChampionsReturn, ChampionReturn } from '@/types/championReturn';
+import { AllChampionsReturn, ChampionDamageType, ChampionReturn, Roles } from '@/types/championReturn';
 
 export const ping = async () => {
   try {
@@ -47,6 +47,46 @@ export const getRandomChampion = async ({
     if(data.result.length === 0) throw new Error('Champion not found');
     return data.result[0] as ChampionReturn;
   } catch(error) {
+    console.log(`Error: `, error);
+    throw new Error('An error ocurred');
+  }
+}
+
+
+export const addChampion = async (champion: ChampionReturn) => {
+  let role = '';
+  let damage = '';
+  const rolesBase: Roles[] = ['top', 'jg', 'mid', 'adc', 'sup'];
+  const damagesBase: ChampionDamageType[] = ['ad', 'ap', 'tank'];
+
+  try {
+
+    for(let i = 0; i < rolesBase.length; i++) {
+      if(champion[rolesBase[i]]) role += `${rolesBase[i]},`;
+    }
+
+    for(let i = 0; i < damagesBase.length; i++) {
+      if(champion[damagesBase[i]]) damage += `${damagesBase[i]},`;
+    }
+
+    const formData = new URLSearchParams();
+    formData.append('name', champion.name);
+    formData.append('nameBase', champion.nameBase);
+    formData.append('role', role);
+    formData.append('type', damage);
+    formData.append('ranged', champion.ranged === true ? 'true' : 'false');
+
+    const response = await fetch('http://localhost:80/addNewChampion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData,
+    });
+    const data = await response.json();
+    return data as {status: string; newChampion: ChampionReturn};
+    
+  } catch (error) {
     console.log(`Error: `, error);
     throw new Error('An error ocurred');
   }
