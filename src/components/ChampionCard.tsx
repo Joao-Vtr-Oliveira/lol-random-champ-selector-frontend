@@ -25,7 +25,7 @@ const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {
       <CardFooter>
         <Box margin='auto'>
           <Link href={`/champion/${champion.nameBase}`}>
-            <Button colorScheme='yellow'>Editar</Button>
+            <Button colorScheme='yellow'>Edit</Button>
           </Link>
         </Box>
       </CardFooter>
