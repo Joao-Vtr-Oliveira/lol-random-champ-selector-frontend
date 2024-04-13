@@ -41,7 +41,6 @@ const Random = () => {
   const fetchChampion = async () => {
     try {
       const data = await getRandomChampion({ role, type, range });
-      console.log(data);
       if (data) setChampion(data);
     } catch (error) {
       toast(toastHelper('notFound'));
