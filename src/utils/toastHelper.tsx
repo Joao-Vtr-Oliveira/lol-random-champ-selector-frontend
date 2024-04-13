@@ -1,4 +1,4 @@
-type info = 'name' | 'role' | 'type' | 'alreadyExists' | 'championAdded' | 'error';
+type info = 'name' | 'role' | 'type' | 'alreadyExists' | 'championAdded' | 'notFound' | 'error';
 
 type toastType = {
   title: string;
@@ -42,6 +42,11 @@ const toastHelper = (info: info): toastType => {
       finalToast.title = 'Sucess!';
       finalToast.description = 'Champion added with sucess';
       finalToast.status = 'success';
+      break;
+    case 'notFound':
+      finalToast.title = 'No champion found!';
+      finalToast.description = 'Please, check your requirements';
+      finalToast.status = 'error';
       break;
     case 'error':
       finalToast.title = 'Error!';
