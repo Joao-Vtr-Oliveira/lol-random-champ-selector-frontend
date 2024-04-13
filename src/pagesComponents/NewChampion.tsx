@@ -39,6 +39,13 @@ const NewChampion = () => {
 		return true;
 	};
 
+	const checkFieldsForInput = () => {
+		if (!name || !nameBase) return false
+		if (!top && !jg && !mid && !adc && !sup) return false
+		if (!ad && !ap && !tank) return false
+		return true;
+	};
+
 	const fetchAddChampion = async () => {
 		if (checkFields() !== true) return;
 		try {
@@ -173,7 +180,7 @@ const NewChampion = () => {
 					</Box>
 
 					<Box display='flex' justifyContent='center'>
-						<Button onClick={fetchAddChampion} colorScheme='green'>
+						<Button isDisabled={!checkFieldsForInput()} onClick={fetchAddChampion} colorScheme='green'>
 							Add champion
 						</Button>
 					</Box>
