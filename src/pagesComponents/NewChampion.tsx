@@ -13,6 +13,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import {useRouter} from 'next/navigation';
 
 const NewChampion = () => {
 	const [top, setTop] = useState(false);
@@ -31,6 +32,7 @@ const NewChampion = () => {
 	const [nameBase, setNameBase] = useState('');
 
 	const toast = useToast();
+	const { push } = useRouter();
 
 	const checkFields = () => {
 		if (!name || !nameBase) return toast(toastHelper('name'));
@@ -63,6 +65,7 @@ const NewChampion = () => {
 				ranged,
 			});
 			if (data.status !== 'OK') return toast(toastHelper('alreadyExists'));
+			push('/');
 			return toast(toastHelper('championAdded'));
 		} catch (error) {
 			toast(toastHelper('error'));
