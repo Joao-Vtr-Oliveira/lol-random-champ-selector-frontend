@@ -65,7 +65,7 @@ const NewChampion = () => {
 				ranged,
 			});
 			if (data.status !== 'OK') return toast(toastHelper('alreadyExists'));
-			push('/');
+			push('/list');
 			return toast(toastHelper('championAdded'));
 		} catch (error) {
 			toast(toastHelper('error'));

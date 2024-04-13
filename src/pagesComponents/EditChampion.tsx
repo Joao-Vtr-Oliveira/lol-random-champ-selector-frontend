@@ -41,14 +41,14 @@ const EditChampion = ({ params }: PageParams) => {
     if(!champion) return;
     const data = await updateChampion(champion);
     console.log(data);
-    push('/')
+    push('/list')
   }
 
   const fetchDelete = async () => {
     if(!champion) return;
     const data = await deleteChampion(champion.name);
     console.log(data);
-    push('/')
+    push('/list')
   }
 
   if(info === 'error') return <p>Internal Error</p>
