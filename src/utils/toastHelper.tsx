@@ -1,4 +1,4 @@
-type info = 'name' | 'role' | 'type' | 'alreadyExists' | 'championAdded' | 'notFound' | 'error';
+type info = 'name' | 'role' | 'type' | 'alreadyExists' | 'championAdded' | 'championUpdated' | 'championDeleted' | 'notFound' | 'error';
 
 type toastType = {
   title: string;
@@ -41,6 +41,16 @@ const toastHelper = (info: info): toastType => {
     case 'championAdded':
       finalToast.title = 'Sucess!';
       finalToast.description = 'Champion added with sucess';
+      finalToast.status = 'success';
+      break;
+    case 'championUpdated':
+      finalToast.title = 'Sucess!';
+      finalToast.description = 'Champion updated with sucess';
+      finalToast.status = 'success';
+      break;
+    case 'championDeleted':
+      finalToast.title = 'Sucess!';
+      finalToast.description = 'Champion deleted with sucess';
       finalToast.status = 'success';
       break;
     case 'notFound':
