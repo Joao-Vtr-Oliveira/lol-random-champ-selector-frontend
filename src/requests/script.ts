@@ -85,9 +85,27 @@ export const addChampion = async (champion: ChampionReturn) => {
     });
     const data = await response.json();
     return data as {status: string; newChampion: ChampionReturn};
-    
   } catch (error) {
     console.log(`Error: `, error);
     throw new Error('An error ocurred');
+  }
+}
+
+export const getSpecificChampion = async (championBaseName: string) => {
+  try {
+    const formData = new URLSearchParams();
+    formData.append('nameBase', championBaseName);
+    const response = await fetch('http://localhost:80/getSpecifChampion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData,
+    });
+    const data = await response.json();
+    return data as ChampionReturn;
+  } catch(error) {
+    console.log(error);
+    throw new Error('an error ocurred');
   }
 }
