@@ -11,20 +11,22 @@ import {
 	Heading,
 	Input,
 	Stack,
+	useToast,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import {useRouter} from 'next/navigation';
+import toastHelper from '@/utils/toastHelper';
 
 const EditChampion = ({ params }: PageParams) => {
 	const [champion, setChampion] = useState<ChampionReturn>();
   const [info, setInfo] = useState<boolean | 'error'>(false);
 
   const { push } = useRouter();
+	const toast = useToast();
 
 	const getChamp = async () => {
     try {
       const data = await getSpecificChampion(params.name);
-      console.log(data);
       setChampion(data);
       if(data === null) setInfo('error');
     } catch(error) {
@@ -35,21 +37,48 @@ const EditChampion = ({ params }: PageParams) => {
 	useEffect(() => {
 		getChamp();
 	}, []);
+	
+	const checkFields = () => {
+		if (!champion) return;
+		if (!champion.nameBase) return toast(toastHelper('name'));
+		if (!champion.top && !champion.jg && !champion.mid && !champion.adc && !champion.sup) return toast(toastHelper('role'));
+		if (!champion.ad && !champion.ap && !champion.tank) return toast(toastHelper('type'));
+		return true;
+	};
 
+	const checkFieldsForInput = () => {
+		if (!champion) return;
+		if (!champion.name || !champion.nameBase) return false
+		if (!champion.top && !champion.jg && !champion.mid && !champion.adc && !champion.sup) return false
+		if (!champion.ad && !champion.ap && !champion.tank) return false
+		return true;
+	};
+	
   const fetchUpdate = async () => {
-    console.log(champion);
-    if(!champion) return;
-    const data = await updateChampion(champion);
-    console.log(data);
-    push('/list')
+		if(checkFields() !== true) return;
+		try {
+			if(!champion) return;
+			const data = await updateChampion(champion);
+			if(data.status !== 'OK') return toast(toastHelper('error'));
+			push('/list');
+			return toast(toastHelper('championUpdated'))
+		} catch (error) {
+			toast(toastHelper('error'))
+		}
   }
 
   const fetchDelete = async () => {
-    if(!champion) return;
-    const data = await deleteChampion(champion.name);
-    console.log(data);
-    push('/list')
+		try {
+			if(!champion) return;
+			const data = await deleteChampion(champion.name);
+			if(data.status !== 'OK') return toast(toastHelper('error'));
+			push('/list');
+			return toast(toastHelper('championDeleted'));
+		} catch (error) {
+			toast(toastHelper('error'));
+		}
   }
+
 
   if(info === 'error') return <p>Internal Error</p>
 	if (!champion) return <p>Loading</p>;
@@ -177,7 +206,7 @@ const EditChampion = ({ params }: PageParams) => {
 
 					<Box display='flex' justifyContent='center'>
 						<Button
-							// isDisabled={!checkFieldsForInput()}
+							isDisabled={!checkFieldsForInput()}
 							onClick={fetchUpdate}
 							colorScheme='green'
               mr={5}
@@ -185,7 +214,6 @@ const EditChampion = ({ params }: PageParams) => {
 							Update champion
 						</Button>
 						<Button
-							// isDisabled={!checkFieldsForInput()}
 							onClick={fetchDelete}
 							colorScheme='red'
 						>
