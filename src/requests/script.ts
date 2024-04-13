@@ -109,3 +109,23 @@ export const getSpecificChampion = async (championBaseName: string) => {
     throw new Error('an error ocurred');
   }
 }
+
+
+export const deleteChampion = async (championName: string) => {
+  try {
+    const formData = new URLSearchParams();
+    formData.append('name', championName);
+    const response = await fetch('http://localhost:80/deleteChampion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData,
+    });
+    const data = await response.json();
+    return data as {status: string; message: string};
+  } catch(error) {
+    console.log(error);
+    throw new Error('an error ocurred');
+  }
+}
