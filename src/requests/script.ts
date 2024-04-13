@@ -161,7 +161,7 @@ export const updateChampion = async (champion: ChampionReturn) => {
       body: formData,
     });
     const data = await response.json();
-    return data as {status: string; newChampion: ChampionReturn};
+    return data as {status: string; updatedChampion: ChampionReturn};
   } catch (error) {
     console.log(`Error: `, error);
     throw new Error('An error ocurred');
