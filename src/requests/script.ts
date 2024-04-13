@@ -95,15 +95,15 @@ export const getSpecificChampion = async (championBaseName: string) => {
   try {
     const formData = new URLSearchParams();
     formData.append('nameBase', championBaseName);
-    const response = await fetch('http://localhost:80/getSpecifChampion', {
+    const response = await fetch('http://localhost:80/getSpecificChampion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: formData,
     });
-    const data = await response.json();
-    return data as ChampionReturn;
+    const data: {result: ChampionReturn} = await response.json();
+    return data.result as ChampionReturn;
   } catch(error) {
     console.log(error);
     throw new Error('an error ocurred');
