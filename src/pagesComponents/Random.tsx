@@ -3,6 +3,7 @@
 import ChampionCard from '@/components/ChampionCard';
 import { getRandomChampion } from '@/requests/script';
 import { ChampionReturn } from '@/types/championReturn';
+import toastHelper from '@/utils/toastHelper';
 import {
 	Box,
 	Button,
@@ -42,13 +43,7 @@ const Random = () => {
       console.log(data);
       if (data) setChampion(data);
     } catch (error) {
-      toast({
-        title: 'No champion found!',
-        description: 'Please, check your requirements',
-        status: 'error',
-        duration: 5000,
-        isClosable: true
-      });
+      toast(toastHelper('notFound'));
       setChampion(championBase);
     }
 	};
