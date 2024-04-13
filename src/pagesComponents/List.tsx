@@ -6,7 +6,7 @@ import { AllChampionsReturn } from '@/types/championReturn';
 import { Box, Grid, GridItem, Heading } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-const HomeComponent = () => {
+const ListComponent = () => {
 	const [data, setData] = useState<AllChampionsReturn | null>();
 	const [changeInfo, setChangeInfo] = useState<Boolean | 'error'>(false);
 
@@ -45,4 +45,4 @@ const HomeComponent = () => {
 	);
 };
 
-export default HomeComponent;
+export default ListComponent;
