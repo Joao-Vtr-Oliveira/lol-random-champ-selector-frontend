@@ -116,7 +116,7 @@ export const deleteChampion = async (championName: string) => {
     const formData = new URLSearchParams();
     formData.append('name', championName);
     const response = await fetch('http://localhost:80/deleteChampion', {
-      method: 'POST',
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
