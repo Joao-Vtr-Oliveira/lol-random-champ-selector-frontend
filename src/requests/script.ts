@@ -2,7 +2,7 @@ import { AllChampionsReturn, ChampionDamageType, ChampionReturn, Roles } from '@
 
 export const ping = async () => {
   try {
-    const response = await fetch('http://localhost:80/ping/');
+    const response = await fetch('http://10.0.0.100/ping/');
     const data = await response.json();
     return data;
   } catch (error) {
@@ -13,7 +13,7 @@ export const ping = async () => {
 
 export const getAllChampions = async () => {
   try {
-    const response = await fetch('http://localhost:80/getAllChampions/');
+    const response = await fetch('http://10.0.0.100/getAllChampions/');
     const data = await response.json();
     return data as AllChampionsReturn;
   } catch (error) {
@@ -36,7 +36,7 @@ export const getRandomChampion = async ({
     if(type) formData.append('type', type);
     if(range) formData.append('ranged', range === 'ranged' ? 'true' : 'false');
     
-    const response = await fetch('http://localhost:80/getRandomChampion', {
+    const response = await fetch('http://10.0.0.100/getRandomChampion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -76,7 +76,7 @@ export const addChampion = async (champion: ChampionReturn) => {
     formData.append('type', damage);
     formData.append('ranged', champion.ranged === true ? 'true' : 'false');
 
-    const response = await fetch('http://localhost:80/addNewChampion', {
+    const response = await fetch('http://10.0.0.100/addNewChampion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -95,7 +95,7 @@ export const getSpecificChampion = async (championBaseName: string) => {
   try {
     const formData = new URLSearchParams();
     formData.append('nameBase', championBaseName);
-    const response = await fetch('http://localhost:80/getSpecificChampion', {
+    const response = await fetch('http://10.0.0.100/getSpecificChampion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -115,7 +115,7 @@ export const deleteChampion = async (championName: string) => {
   try {
     const formData = new URLSearchParams();
     formData.append('name', championName);
-    const response = await fetch('http://localhost:80/deleteChampion', {
+    const response = await fetch('http://10.0.0.100/deleteChampion', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -153,7 +153,7 @@ export const updateChampion = async (champion: ChampionReturn) => {
     formData.append('type', damage);
     formData.append('ranged', champion.ranged === true ? 'true' : 'false');
 
-    const response = await fetch('http://localhost:80/updateChampion', {
+    const response = await fetch('http://10.0.0.100/updateChampion', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
