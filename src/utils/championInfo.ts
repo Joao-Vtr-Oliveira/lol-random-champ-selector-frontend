@@ -16,3 +16,17 @@ export const championBase: ChampionReturn = {
   tank: false,
   ranged: false,
 };
+
+export const championEmptyBase: ChampionReturn = {
+  name: '',
+  nameBase: '',
+  top: false,
+  jg: false,
+  mid: false,
+  adc: false,
+  sup: false,
+  ad: false,
+  ap: false,
+  tank: false,
+  ranged: false,
+};
