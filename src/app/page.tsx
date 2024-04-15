@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const RandomPage = () => {
   return(
-    <Box className='flex h-5/6 flex-col items-center justify-center'>
+    <Box className='flex h-5/6 flex-col items-center '>
       <Random />
     </Box>
   )
