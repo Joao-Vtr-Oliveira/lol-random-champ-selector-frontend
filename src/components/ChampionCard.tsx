@@ -1,12 +1,10 @@
-import { ChampionDamageType, ChampionReturn, Roles } from '@/types/championReturn';
+import { ChampionReturn } from '@/types/championReturn';
+import { damageTypes, rolesArray } from '@/utils/championInfo';
 import { createArray } from '@/utils/createArray';
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 
-const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {
-  const rolesArray: Roles[] = ['top', 'jg', 'mid', 'adc', 'sup'];
-  const damageTypes: ChampionDamageType[] = ['ad', 'ap', 'tank'];
-  
+const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {  
   const roles = createArray(rolesArray, champion);
   const types = createArray(damageTypes, champion);
 
