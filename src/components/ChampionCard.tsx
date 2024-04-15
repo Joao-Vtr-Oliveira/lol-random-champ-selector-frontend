@@ -1,12 +1,12 @@
 import { ChampionReturn } from '@/types/championReturn';
-import { damageTypes, rolesArray } from '@/utils/championInfo';
+import { damageTypesArray, rolesArray } from '@/utils/championInfo';
 import { createArray } from '@/utils/createArray';
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 
 const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {  
   const roles = createArray(rolesArray, champion);
-  const types = createArray(damageTypes, champion);
+  const types = createArray(damageTypesArray, champion);
 
 	return (
 		<Card display={'flex'} mb={10} flexDirection={'column'}>
