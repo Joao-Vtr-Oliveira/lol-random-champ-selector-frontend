@@ -15,6 +15,7 @@ import {
 	Heading,
 	Input,
 	Stack,
+	Tooltip,
 	useToast,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
@@ -109,8 +110,10 @@ const EditChampion = ({ params }: PageParams) => {
 				{champion.name}:
 			</Heading>
 			<Box mb={10}>
-				<Heading textAlign='center' mb={5} size='md'>
-					Base Name
+			<Heading textAlign='center' mb={5} size='md'>
+				<Tooltip label="How the name is in the league of graphs URL" aria-label='Base Name'>
+					Base Name (?)
+				</Tooltip>
 				</Heading>
 				<Input
 					value={champion.nameBase}

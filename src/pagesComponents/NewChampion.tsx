@@ -10,6 +10,7 @@ import {
 	Heading,
 	Input,
 	Stack,
+	Tooltip,
 	useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -68,7 +69,9 @@ const NewChampion = () => {
 			</Box>
 			<Box mb={10}>
 				<Heading textAlign='center' mb={5} size='md'>
-					Base Name
+				<Tooltip label="How the name is in the league of graphs URL" aria-label='Base Name'>
+					Base Name (?)
+				</Tooltip>
 				</Heading>
 				<Input
 					value={champion.nameBase}
