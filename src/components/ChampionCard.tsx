@@ -15,11 +15,11 @@ const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {
 			<CardHeader textAlign='center'>
         {champion.nameBase !== '-' &&
         <Link target='_blank' href={`https://www.leagueofgraphs.com/champions/builds/${champion.nameBase}`}>
-				  <Heading fontSize='2xl' color='#570FA0' _hover={{'textDecoration': 'underline'}}>{champion.name}</Heading>
+				  <Heading fontSize='2xl' color='customPurple' _hover={{'textDecoration': 'underline'}}>{champion.name}</Heading>
         </Link>
         }
         {champion.nameBase === '-' &&
-				  <Heading fontSize='2xl' color='#570FA0'>{champion.name}</Heading>
+				  <Heading fontSize='2xl' color='customPurple'>{champion.name}</Heading>
         }
 			</CardHeader>
 			<CardBody>
