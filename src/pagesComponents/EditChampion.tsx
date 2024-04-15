@@ -1,6 +1,10 @@
 'use client';
 
-import { deleteChampion, getSpecificChampion, updateChampion } from '@/requests/script';
+import {
+	deleteChampion,
+	getSpecificChampion,
+	updateChampion,
+} from '@/requests/script';
 import { ChampionReturn } from '@/types/championReturn';
 import { PageParams } from '@/types/pageParams';
 import {
@@ -14,73 +18,89 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import toastHelper from '@/utils/toastHelper';
+import { rolesArray, damageTypesArray } from '@/utils/championInfo';
 
 const EditChampion = ({ params }: PageParams) => {
 	const [champion, setChampion] = useState<ChampionReturn>();
-  const [info, setInfo] = useState<boolean | 'error'>(false);
+	const [info, setInfo] = useState<boolean | 'error'>(false);
 
-  const { push } = useRouter();
+	const { push } = useRouter();
 	const toast = useToast();
 
 	const getChamp = async () => {
-    try {
-      const data = await getSpecificChampion(params.name);
-      setChampion(data);
-      if(data === null) setInfo('error');
-    } catch(error) {
-      setInfo('error');
-    }
+		try {
+			const data = await getSpecificChampion(params.name);
+			setChampion(data);
+			if (data === null) setInfo('error');
+		} catch (error) {
+			setInfo('error');
+		}
 	};
 
 	useEffect(() => {
 		getChamp();
 	}, []);
-	
+
 	const checkFields = () => {
 		if (!champion) return;
 		if (!champion.nameBase) return toast(toastHelper('name'));
-		if (!champion.top && !champion.jg && !champion.mid && !champion.adc && !champion.sup) return toast(toastHelper('role'));
-		if (!champion.ad && !champion.ap && !champion.tank) return toast(toastHelper('type'));
+		if (
+			!champion.top &&
+			!champion.jg &&
+			!champion.mid &&
+			!champion.adc &&
+			!champion.sup
+		)
+			return toast(toastHelper('role'));
+		if (!champion.ad && !champion.ap && !champion.tank)
+			return toast(toastHelper('type'));
 		return true;
 	};
 
 	const checkFieldsForInput = () => {
 		if (!champion) return;
-		if (!champion.name || !champion.nameBase) return false
-		if (!champion.top && !champion.jg && !champion.mid && !champion.adc && !champion.sup) return false
-		if (!champion.ad && !champion.ap && !champion.tank) return false
+		if (!champion.name || !champion.nameBase) return false;
+		if (
+			!champion.top &&
+			!champion.jg &&
+			!champion.mid &&
+			!champion.adc &&
+			!champion.sup
+		)
+			return false;
+		if (!champion.ad && !champion.ap && !champion.tank) return false;
 		return true;
 	};
-	
-  const fetchUpdate = async () => {
-		if(checkFields() !== true) return;
-		try {
-			if(!champion) return;
-			const data = await updateChampion(champion);
-			if(data.status !== 'OK') return toast(toastHelper('error'));
-			push('/list');
-			return toast(toastHelper('championUpdated'))
-		} catch (error) {
-			toast(toastHelper('error'))
-		}
-  }
 
-  const fetchDelete = async () => {
+	const fetchUpdate = async () => {
+		if (checkFields() !== true) return;
 		try {
-			if(!champion) return;
+			if (!champion) return;
+			console.log(champion);
+			const data = await updateChampion(champion);
+			if (data.status !== 'OK') return toast(toastHelper('error'));
+			push('/list');
+			return toast(toastHelper('championUpdated'));
+		} catch (error) {
+			toast(toastHelper('error'));
+		}
+	};
+
+	const fetchDelete = async () => {
+		try {
+			if (!champion) return;
 			const data = await deleteChampion(champion.name);
-			if(data.status !== 'OK') return toast(toastHelper('error'));
+			if (data.status !== 'OK') return toast(toastHelper('error'));
 			push('/list');
 			return toast(toastHelper('championDeleted'));
 		} catch (error) {
 			toast(toastHelper('error'));
 		}
-  }
+	};
 
-
-  if(info === 'error') return <p>Internal Error</p>
+	if (info === 'error') return <p>Internal Error</p>;
 	if (!champion) return <p>Loading</p>;
 
 	return (
@@ -95,7 +115,9 @@ const EditChampion = ({ params }: PageParams) => {
 				<Input
 					value={champion.nameBase}
 					textAlign='center'
-					onChange={(e) => setChampion({...champion, nameBase: e.target.value})}
+					onChange={(e) =>
+						setChampion({ ...champion, nameBase: e.target.value })
+					}
 				/>
 			</Box>
 			<Box display='flex'>
@@ -106,46 +128,17 @@ const EditChampion = ({ params }: PageParams) => {
 						</Heading>
 						<CheckboxGroup colorScheme='green'>
 							<Stack justify='center' direction='row'>
-								<Checkbox
-									isChecked={champion.top}
-									onChange={() =>
-										setChampion({ ...champion, top: !champion.top })
-									}
-								>
-									Top
-								</Checkbox>
-								<Checkbox
-									isChecked={champion.jg}
-									onChange={() =>
-										setChampion({ ...champion, jg: !champion.jg })
-									}
-								>
-									Jg
-								</Checkbox>
-								<Checkbox
-									isChecked={champion.mid}
-									onChange={() =>
-										setChampion({ ...champion, mid: !champion.mid })
-									}
-								>
-									Mid
-								</Checkbox>
-								<Checkbox
-									isChecked={champion.adc}
-									onChange={() =>
-										setChampion({ ...champion, adc: !champion.adc })
-									}
-								>
-									Adc
-								</Checkbox>
-								<Checkbox
-									isChecked={champion.sup}
-									onChange={() =>
-										setChampion({ ...champion, sup: !champion.sup })
-									}
-								>
-									sup
-								</Checkbox>
+								{rolesArray.map((role) => (
+									<Checkbox
+										key={role}
+										isChecked={champion[role]}
+										onChange={() =>
+											setChampion({ ...champion, [role]: !champion[role] })
+										}
+									>
+										{role}
+									</Checkbox>
+								))}
 							</Stack>
 						</CheckboxGroup>
 					</Box>
@@ -156,30 +149,17 @@ const EditChampion = ({ params }: PageParams) => {
 						</Heading>
 						<CheckboxGroup colorScheme='green'>
 							<Stack justify='center' direction='row'>
-								<Checkbox
-									isChecked={champion.ad}
-									onChange={() =>
-										setChampion({ ...champion, ad: !champion.ad })
-									}
-								>
-									Ad
-								</Checkbox>
-								<Checkbox
-									isChecked={champion.ap}
-									onChange={() =>
-										setChampion({ ...champion, ap: !champion.ap })
-									}
-								>
-									Ap
-								</Checkbox>
-								<Checkbox
-									isChecked={champion.tank}
-									onChange={() =>
-										setChampion({ ...champion, tank: !champion.tank })
-									}
-								>
-									Tank
-								</Checkbox>
+								{damageTypesArray.map((type) => (
+									<Checkbox
+										key={type}
+										isChecked={champion[type]}
+										onChange={() =>
+											setChampion({ ...champion, [type]: !champion[type] })
+										}
+									>
+										{type}
+									</Checkbox>
+								))}
 							</Stack>
 						</CheckboxGroup>
 					</Box>
@@ -209,14 +189,11 @@ const EditChampion = ({ params }: PageParams) => {
 							isDisabled={!checkFieldsForInput()}
 							onClick={fetchUpdate}
 							colorScheme='green'
-              mr={5}
+							mr={5}
 						>
 							Update champion
 						</Button>
-						<Button
-							onClick={fetchDelete}
-							colorScheme='red'
-						>
+						<Button onClick={fetchDelete} colorScheme='red'>
 							Delete champion
 						</Button>
 					</Box>
