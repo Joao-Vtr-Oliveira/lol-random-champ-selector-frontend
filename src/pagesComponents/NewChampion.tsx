@@ -14,56 +14,33 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import {useRouter} from 'next/navigation';
+import { ChampionReturn } from '@/types/championReturn';
+import { championEmptyBase, rolesArray, damageTypesArray } from '@/utils/championInfo';
 
 const NewChampion = () => {
-	const [top, setTop] = useState(false);
-	const [jg, setJg] = useState(false);
-	const [mid, setMid] = useState(false);
-	const [adc, setAdc] = useState(false);
-	const [sup, setSup] = useState(false);
-
-	const [ad, setAd] = useState(false);
-	const [ap, setAp] = useState(false);
-	const [tank, setTank] = useState(false);
-
-	const [ranged, setRanged] = useState(false);
-
-	const [name, setName] = useState('');
-	const [nameBase, setNameBase] = useState('');
+	const [champion, setChampion] = useState<ChampionReturn>(championEmptyBase);
 
 	const toast = useToast();
 	const { push } = useRouter();
 
 	const checkFields = () => {
-		if (!name || !nameBase) return toast(toastHelper('name'));
-		if (!top && !jg && !mid && !adc && !sup) return toast(toastHelper('role'));
-		if (!ad && !ap && !tank) return toast(toastHelper('type'));
+		if (!champion.name || !champion.nameBase) return toast(toastHelper('name'));
+		if (!champion.top && !champion.jg && !champion.mid && !champion.adc && !champion.sup) return toast(toastHelper('role'));
+		if (!champion.ad && !champion.ap && !champion.tank) return toast(toastHelper('type'));
 		return true;
 	};
 
 	const checkFieldsForInput = () => {
-		if (!name || !nameBase) return false
-		if (!top && !jg && !mid && !adc && !sup) return false
-		if (!ad && !ap && !tank) return false
+		if (!champion.name || !champion.nameBase) return false
+		if (!champion.top && !champion.jg && !champion.mid && !champion.adc && !champion.sup) return false
+		if (!champion.ad && !champion.ap && !champion.tank) return false
 		return true;
 	};
 
 	const fetchAddChampion = async () => {
 		if (checkFields() !== true) return;
 		try {
-			const data = await addChampion({
-				name,
-				nameBase,
-				top,
-				jg,
-				mid,
-				adc,
-				sup,
-				ad,
-				ap,
-				tank,
-				ranged,
-			});
+			const data = await addChampion(champion);
 			if (data.status !== 'OK') return toast(toastHelper('alreadyExists'));
 			push('/list');
 			return toast(toastHelper('championAdded'));
@@ -82,9 +59,11 @@ const NewChampion = () => {
 					Name
 				</Heading>
 				<Input
-					value={name}
+					value={champion.name}
 					textAlign='center'
-					onChange={(e) => setName(e.target.value)}
+					onChange={(e) =>
+						setChampion({ ...champion, name: e.target.value })
+					}
 				/>
 			</Box>
 			<Box mb={10}>
@@ -92,9 +71,11 @@ const NewChampion = () => {
 					Base Name
 				</Heading>
 				<Input
-					value={nameBase}
+					value={champion.nameBase}
 					textAlign='center'
-					onChange={(e) => setNameBase(e.target.value)}
+					onChange={(e) =>
+						setChampion({ ...champion, nameBase: e.target.value })
+					}
 				/>
 			</Box>
 			<Box display='flex'>
@@ -105,37 +86,17 @@ const NewChampion = () => {
 						</Heading>
 						<CheckboxGroup colorScheme='green'>
 							<Stack justify='center' direction='row'>
-								<Checkbox
-									isChecked={top}
-									onChange={() => setTop(!top)}
-									value='top'
-								>
-									Top
-								</Checkbox>
-								<Checkbox isChecked={jg} onChange={() => setJg(!jg)} value='jg'>
-									Jg
-								</Checkbox>
-								<Checkbox
-									isChecked={mid}
-									onChange={() => setMid(!mid)}
-									value='mid'
-								>
-									Mid
-								</Checkbox>
-								<Checkbox
-									isChecked={adc}
-									onChange={() => setAdc(!adc)}
-									value='adc'
-								>
-									Adc
-								</Checkbox>
-								<Checkbox
-									isChecked={sup}
-									onChange={() => setSup(!sup)}
-									value='sup'
-								>
-									sup
-								</Checkbox>
+							{rolesArray.map((role) => (
+									<Checkbox
+										key={role}
+										isChecked={champion[role]}
+										onChange={() =>
+											setChampion({ ...champion, [role]: !champion[role] })
+										}
+									>
+										{role}
+									</Checkbox>
+								))}
 							</Stack>
 						</CheckboxGroup>
 					</Box>
@@ -146,19 +107,17 @@ const NewChampion = () => {
 						</Heading>
 						<CheckboxGroup colorScheme='green'>
 							<Stack justify='center' direction='row'>
-								<Checkbox isChecked={ad} onChange={() => setAd(!ad)} value='ad'>
-									Ad
-								</Checkbox>
-								<Checkbox isChecked={ap} onChange={() => setAp(!ap)} value='ap'>
-									Ap
-								</Checkbox>
-								<Checkbox
-									isChecked={tank}
-									onChange={() => setTank(!tank)}
-									value='mid'
-								>
-									Tank
-								</Checkbox>
+							{damageTypesArray.map((type) => (
+									<Checkbox
+										key={type}
+										isChecked={champion[type]}
+										onChange={() =>
+											setChampion({ ...champion, [type]: !champion[type] })
+										}
+									>
+										{type}
+									</Checkbox>
+								))}
 							</Stack>
 						</CheckboxGroup>
 					</Box>
@@ -174,8 +133,10 @@ const NewChampion = () => {
 						</Heading>
 						<Checkbox
 							colorScheme='green'
-							isChecked={ranged}
-							onChange={() => setRanged(!ranged)}
+							isChecked={champion.ranged}
+							onChange={() =>
+								setChampion({ ...champion, ranged: !champion.ranged })
+							}
 							value='ranged'
 						>
 							Ranged
