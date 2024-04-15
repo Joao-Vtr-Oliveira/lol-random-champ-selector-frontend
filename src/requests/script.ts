@@ -1,4 +1,5 @@
 import { AllChampionsReturn, ChampionDamageType, ChampionReturn, Roles } from '@/types/championReturn';
+import { damageTypesArray, rolesArray } from '@/utils/championInfo';
 
 export const ping = async () => {
   try {
@@ -17,7 +18,7 @@ export const getAllChampions = async () => {
     const data = await response.json();
     return data as AllChampionsReturn;
   } catch (error) {
-    throw new Error(`Deu treta: ${error}`);
+    throw new Error(`Error: ${error}`);
   }
 }
 
@@ -56,17 +57,14 @@ export const getRandomChampion = async ({
 export const addChampion = async (champion: ChampionReturn) => {
   let role = '';
   let damage = '';
-  const rolesBase: Roles[] = ['top', 'jg', 'mid', 'adc', 'sup'];
-  const damagesBase: ChampionDamageType[] = ['ad', 'ap', 'tank'];
 
   try {
-
-    for(let i = 0; i < rolesBase.length; i++) {
-      if(champion[rolesBase[i]]) role += `${rolesBase[i]},`;
+    for(let i = 0; i < rolesArray.length; i++) {
+      if(champion[rolesArray[i]]) role += `${rolesArray[i]},`;
     }
 
-    for(let i = 0; i < damagesBase.length; i++) {
-      if(champion[damagesBase[i]]) damage += `${damagesBase[i]},`;
+    for(let i = 0; i < damageTypesArray.length; i++) {
+      if(champion[damageTypesArray[i]]) damage += `${damageTypesArray[i]},`;
     }
 
     const formData = new URLSearchParams();
@@ -133,17 +131,15 @@ export const deleteChampion = async (championName: string) => {
 export const updateChampion = async (champion: ChampionReturn) => {
   let role = '';
   let damage = '';
-  const rolesBase: Roles[] = ['top', 'jg', 'mid', 'adc', 'sup'];
-  const damagesBase: ChampionDamageType[] = ['ad', 'ap', 'tank'];
 
   try {
 
-    for(let i = 0; i < rolesBase.length; i++) {
-      if(champion[rolesBase[i]]) role += `${rolesBase[i]},`;
+    for(let i = 0; i < rolesArray.length; i++) {
+      if(champion[rolesArray[i]]) role += `${rolesArray[i]},`;
     }
 
-    for(let i = 0; i < damagesBase.length; i++) {
-      if(champion[damagesBase[i]]) damage += `${damagesBase[i]},`;
+    for(let i = 0; i < damageTypesArray.length; i++) {
+      if(champion[damageTypesArray[i]]) damage += `${damageTypesArray[i]},`;
     }
 
     const formData = new URLSearchParams();
