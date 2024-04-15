@@ -3,6 +3,7 @@
 import ChampionCard from '@/components/ChampionCard';
 import { getRandomChampion } from '@/requests/script';
 import { ChampionReturn } from '@/types/championReturn';
+import { championBase } from '@/utils/championInfo';
 import toastHelper from '@/utils/toastHelper';
 import {
   Box,
@@ -15,20 +16,6 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-
-const championBase: ChampionReturn = {
-  name: 'Name of the champion',
-  nameBase: '-',
-  top: false,
-  jg: false,
-  mid: false,
-  adc: false,
-  sup: false,
-  ad: false,
-  ap: false,
-  tank: false,
-  ranged: false,
-};
 
 const Random = () => {
   const [champion, setChampion] = useState<ChampionReturn>(championBase);
