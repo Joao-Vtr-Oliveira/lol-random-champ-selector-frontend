@@ -16,17 +16,17 @@ const Header = () => {
   return(
     <Box w={'100%'} className='h-1/6 bg-gradient-to-r from-indigo-800 via-purple-800 to-pink-800' display='flex' justifyContent='space-around' alignItems='center' textColor='black'>
       <Link href={'/'}>
-        <Text color={verifyRoute(pathname, '/') ? '#FA2083' : 'white'} fontSize={['lg', 'xl']} textDecoration={verifyRoute(pathname, '/') ? 'underline' : 'none'} fontFamily='fantasy'>LoL Random Champ Selector</Text>
+        <Text color={verifyRoute(pathname, '/') ? 'customPinky' : 'white'} fontSize={['lg', 'xl']} textDecoration={verifyRoute(pathname, '/') ? 'underline' : 'none'} fontFamily='fantasy'>LoL Random Champ Selector</Text>
       </Link>
       <Box>
         <Link href={'/'}>
-          <Icon boxSize={8} color={verifyRoute(pathname, '/') ? '#FA2083' : 'white'} _hover={verifyRoute(pathname, '/') ? {} : hoverBtn} mr={3} as={IoDice} />
+          <Icon boxSize={8} color={verifyRoute(pathname, '/') ? 'customPinky' : 'white'} _hover={verifyRoute(pathname, '/') ? {} : hoverBtn} mr={3} as={IoDice} />
         </Link>
         <Link href={'/list'}>
-          <Icon color={verifyRoute(pathname, '/list') ? '#FA2083' : 'white'} _hover={verifyRoute(pathname, '/list') ? {} : hoverBtn} boxSize={8} mr={3} as={FaList} />
+          <Icon color={verifyRoute(pathname, '/list') ? 'customPinky' : 'white'} _hover={verifyRoute(pathname, '/list') ? {} : hoverBtn} boxSize={8} mr={3} as={FaList} />
         </Link>
         <Link href={'/new'}>
-          <Icon color={verifyRoute(pathname, '/new') ? '#FA2083' : 'white'} _hover={verifyRoute(pathname, '/new') ? {} : hoverBtn} boxSize={8} mr={3} as={FaPlus} />
+          <Icon color={verifyRoute(pathname, '/new') ? 'customPinky' : 'white'} _hover={verifyRoute(pathname, '/new') ? {} : hoverBtn} boxSize={8} mr={3} as={FaPlus} />
         </Link>
       </Box>
     </Box>
