@@ -1,7 +1,7 @@
 'use client';
 
 import ChampionCard from '@/components/ChampionCard';
-import { getRandomChampion } from '@/requests/script';
+import { getRandomChampion } from '@/requests/lolRequests';
 import { ChampionReturn } from '@/types/championReturn';
 import { championBase } from '@/utils/championInfo';
 import toastHelper from '@/utils/toastHelper';
@@ -42,9 +42,9 @@ const Random = () => {
 				Random Champion
 			</Heading>
 			<Text textAlign='center' margin='auto' w={['70%', '60%', '55%']} mb={5}>
-				This page returns a random champion using the selected info provided bellow.
-        You can select the role, damage type and range of the champion.
-        Or, you can select the default value if you do not have preference
+				This page returns a random champion using the selected info provided
+				bellow. You can select the role, damage type and range of the champion.
+				Or, you can select the default value if you do not have preference
 			</Text>
 			<Box mt={20}>
 				<Flex flexWrap='wrap' alignItems='center' justifyContent='center'>

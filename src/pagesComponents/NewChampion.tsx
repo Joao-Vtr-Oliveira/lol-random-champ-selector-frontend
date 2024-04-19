@@ -1,6 +1,6 @@
 'use client';
 
-import { addChampion } from '@/requests/script';
+import { addChampion } from '@/requests/lolRequests';
 import toastHelper from '@/utils/toastHelper';
 import {
 	Box,
@@ -14,9 +14,13 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ChampionReturn } from '@/types/championReturn';
-import { championEmptyBase, rolesArray, damageTypesArray } from '@/utils/championInfo';
+import {
+	championEmptyBase,
+	rolesArray,
+	damageTypesArray,
+} from '@/utils/championInfo';
 
 const NewChampion = () => {
 	const [champion, setChampion] = useState<ChampionReturn>(championEmptyBase);
@@ -26,15 +30,30 @@ const NewChampion = () => {
 
 	const checkFields = () => {
 		if (!champion.name || !champion.nameBase) return toast(toastHelper('name'));
-		if (!champion.top && !champion.jg && !champion.mid && !champion.adc && !champion.sup) return toast(toastHelper('role'));
-		if (!champion.ad && !champion.ap && !champion.tank) return toast(toastHelper('type'));
+		if (
+			!champion.top &&
+			!champion.jg &&
+			!champion.mid &&
+			!champion.adc &&
+			!champion.sup
+		)
+			return toast(toastHelper('role'));
+		if (!champion.ad && !champion.ap && !champion.tank)
+			return toast(toastHelper('type'));
 		return true;
 	};
 
 	const checkFieldsForInput = () => {
-		if (!champion.name || !champion.nameBase) return false
-		if (!champion.top && !champion.jg && !champion.mid && !champion.adc && !champion.sup) return false
-		if (!champion.ad && !champion.ap && !champion.tank) return false
+		if (!champion.name || !champion.nameBase) return false;
+		if (
+			!champion.top &&
+			!champion.jg &&
+			!champion.mid &&
+			!champion.adc &&
+			!champion.sup
+		)
+			return false;
+		if (!champion.ad && !champion.ap && !champion.tank) return false;
 		return true;
 	};
 
@@ -62,16 +81,17 @@ const NewChampion = () => {
 				<Input
 					value={champion.name}
 					textAlign='center'
-					onChange={(e) =>
-						setChampion({ ...champion, name: e.target.value })
-					}
+					onChange={(e) => setChampion({ ...champion, name: e.target.value })}
 				/>
 			</Box>
 			<Box mb={10}>
 				<Heading textAlign='center' mb={5} size='md'>
-				<Tooltip label="How the name is in the league of graphs URL" aria-label='Base Name'>
-					Base Name (?)
-				</Tooltip>
+					<Tooltip
+						label='How the name is in the league of graphs URL'
+						aria-label='Base Name'
+					>
+						Base Name (?)
+					</Tooltip>
 				</Heading>
 				<Input
 					value={champion.nameBase}
@@ -89,7 +109,7 @@ const NewChampion = () => {
 						</Heading>
 						<CheckboxGroup colorScheme='green'>
 							<Stack justify='center' direction='row'>
-							{rolesArray.map((role) => (
+								{rolesArray.map((role) => (
 									<Checkbox
 										key={role}
 										isChecked={champion[role]}
@@ -110,7 +130,7 @@ const NewChampion = () => {
 						</Heading>
 						<CheckboxGroup colorScheme='green'>
 							<Stack justify='center' direction='row'>
-							{damageTypesArray.map((type) => (
+								{damageTypesArray.map((type) => (
 									<Checkbox
 										key={type}
 										isChecked={champion[type]}
@@ -147,7 +167,11 @@ const NewChampion = () => {
 					</Box>
 
 					<Box display='flex' justifyContent='center'>
-						<Button isDisabled={!checkFieldsForInput()} onClick={fetchAddChampion} colorScheme='green'>
+						<Button
+							isDisabled={!checkFieldsForInput()}
+							onClick={fetchAddChampion}
+							colorScheme='green'
+						>
 							Add champion
 						</Button>
 					</Box>

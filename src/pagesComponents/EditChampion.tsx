@@ -4,7 +4,7 @@ import {
 	deleteChampion,
 	getSpecificChampion,
 	updateChampion,
-} from '@/requests/script';
+} from '@/requests/lolRequests';
 import { ChampionReturn } from '@/types/championReturn';
 import { PageParams } from '@/types/pageParams';
 import {
@@ -110,10 +110,13 @@ const EditChampion = ({ params }: PageParams) => {
 				{champion.name}:
 			</Heading>
 			<Box mb={10}>
-			<Heading textAlign='center' mb={5} size='md'>
-				<Tooltip label="How the name is in the league of graphs URL" aria-label='Base Name'>
-					Base Name (?)
-				</Tooltip>
+				<Heading textAlign='center' mb={5} size='md'>
+					<Tooltip
+						label='How the name is in the league of graphs URL'
+						aria-label='Base Name'
+					>
+						Base Name (?)
+					</Tooltip>
 				</Heading>
 				<Input
 					value={champion.nameBase}

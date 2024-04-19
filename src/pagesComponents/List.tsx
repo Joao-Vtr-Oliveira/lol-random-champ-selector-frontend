@@ -1,7 +1,7 @@
 'use client';
 
 import ChampionCard from '@/components/ChampionCard';
-import { getAllChampions } from '@/requests/script';
+import { getAllChampions } from '@/requests/lolRequests';
 import { AllChampionsReturn } from '@/types/championReturn';
 import { Box, Grid, GridItem, Heading } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
@@ -32,13 +32,13 @@ const ListComponent = () => {
 			<Grid
 				templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
 				gap={[0, 20]}
-        mt={10}
+				mt={10}
 				mb={10}
 			>
 				{data?.result.map((champ) => (
-          <GridItem key={champ.nameBase}>
-            <ChampionCard champion={champ} />
-          </GridItem>
+					<GridItem key={champ.nameBase}>
+						<ChampionCard champion={champ} />
+					</GridItem>
 				))}
 			</Grid>
 		</Box>
