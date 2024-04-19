@@ -7,8 +7,8 @@ import Header from '@/components/Header';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Home',
-	description: 'Home Page',
+	title: 'Lol-random-selector',
+	description: 'Front-end of my lol API',
 };
 
 export default function RootLayout({
