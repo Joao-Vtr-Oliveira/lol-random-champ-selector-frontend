@@ -16,6 +16,7 @@ import {
 	Text,
 	useToast,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const Random = () => {
@@ -45,6 +46,9 @@ const Random = () => {
 				This page returns a random champion using the selected info provided
 				bellow. You can select the role, damage type and range of the champion.
 				Or, you can select the default value if you do not have preference
+			</Text>
+			<Text textAlign='center' margin='auto' w={['70%', '60%', '55%']} mb={5}>
+				OBS: If you want to use the random agent selector for valorant, click <Link href={'/valorant'}><Box as='span' textDecoration='underline' textColor='customPurple'>here.</Box></Link>
 			</Text>
 			<Box mt={20}>
 				<Flex flexWrap='wrap' alignItems='center' justifyContent='center'>
