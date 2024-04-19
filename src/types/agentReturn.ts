@@ -5,3 +5,5 @@ export type AgentReturn = {
   initiator: boolean;
   duelist: boolean;
 }
+
+export type AgentRole = 'controller' | 'sentinel' | 'initiator' | 'duelist';
