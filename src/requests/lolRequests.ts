@@ -1,5 +1,7 @@
-import { AllChampionsReturn, ChampionDamageType, ChampionReturn, Roles } from '@/types/championReturn';
+import { AllChampionsReturn, ChampionReturn } from '@/types/championReturn';
 import { damageTypesArray, rolesArray } from '@/utils/championInfo';
+
+const url = 'http://localhost';
 
 export const ping = async () => {
   try {
@@ -14,7 +16,7 @@ export const ping = async () => {
 
 export const getAllChampions = async () => {
   try {
-    const response = await fetch('http://10.0.0.100/getAllChampions/');
+    const response = await fetch(`${url}/getAllChampions/`);
     const data = await response.json();
     return data as AllChampionsReturn;
   } catch (error) {
@@ -37,7 +39,7 @@ export const getRandomChampion = async ({
     if(type) formData.append('type', type);
     if(range) formData.append('ranged', range === 'ranged' ? 'true' : 'false');
     
-    const response = await fetch('http://10.0.0.100/getRandomChampion', {
+    const response = await fetch(`${url}/getRandomChampion/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -74,7 +76,7 @@ export const addChampion = async (champion: ChampionReturn) => {
     formData.append('type', damage);
     formData.append('ranged', champion.ranged === true ? 'true' : 'false');
 
-    const response = await fetch('http://10.0.0.100/addNewChampion', {
+    const response = await fetch(`${url}/addChampion/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -93,7 +95,7 @@ export const getSpecificChampion = async (championBaseName: string) => {
   try {
     const formData = new URLSearchParams();
     formData.append('nameBase', championBaseName);
-    const response = await fetch('http://10.0.0.100/getSpecificChampion', {
+    const response = await fetch(`${url}/getSpecificChampion/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -113,7 +115,7 @@ export const deleteChampion = async (championName: string) => {
   try {
     const formData = new URLSearchParams();
     formData.append('name', championName);
-    const response = await fetch('http://10.0.0.100/deleteChampion', {
+    const response = await fetch(`${url}/deleteChampion/`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -149,7 +151,7 @@ export const updateChampion = async (champion: ChampionReturn) => {
     formData.append('type', damage);
     formData.append('ranged', champion.ranged === true ? 'true' : 'false');
 
-    const response = await fetch('http://10.0.0.100/updateChampion', {
+    const response = await fetch(`${url}/updateChampion/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
