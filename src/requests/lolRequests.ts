@@ -76,7 +76,7 @@ export const addChampion = async (champion: ChampionReturn) => {
     formData.append('type', damage);
     formData.append('ranged', champion.ranged === true ? 'true' : 'false');
 
-    const response = await fetch(`${url}/addChampion/`, {
+    const response = await fetch(`${url}/addNewChampion/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
