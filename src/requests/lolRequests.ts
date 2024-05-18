@@ -1,11 +1,11 @@
 import { AllChampionsReturn, ChampionReturn } from '@/types/championReturn';
 import { damageTypesArray, rolesArray } from '@/utils/championInfo';
 
-const url = 'http://localhost';
+const url = 'http://localhost:3000';
 
 export const ping = async () => {
   try {
-    const response = await fetch('http://10.0.0.100/ping/');
+    const response = await fetch(`${url}/ping/`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -76,7 +76,7 @@ export const addChampion = async (champion: ChampionReturn) => {
     formData.append('type', damage);
     formData.append('ranged', champion.ranged === true ? 'true' : 'false');
 
-    const response = await fetch(`${url}/addChampion/`, {
+    const response = await fetch(`${url}/addNewChampion/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
