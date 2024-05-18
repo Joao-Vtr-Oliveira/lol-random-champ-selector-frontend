@@ -3,7 +3,7 @@
 <div align=center>
   <p style='font-size: 25px; text-decoration: underline; font-weight: bold'>Ferramentas:</p>
   <a href="https://github.com/Joao-Vtr-Oliveira/todo-list-login">
-    <img src="https://skillicons.dev/icons?i=react,ts,tailwind,nextjs" />
+    <img src="https://skillicons.dev/icons?i=react,ts,tailwind,nextjs,docker" />
   </a>
 </div>
 
@@ -17,6 +17,8 @@
 ---
 
 - Você pode ver a implementação back-end desse projeto [Aqui.](https://github.com/Joao-Vtr-Oliveira/lol-random-champ-selector-backend)
+
+> Esse projeto também contém uma imagem docker. E no projeto back-end, há um arquivo `YML` que faz o compose de ambos projetos. E já se é iniciado: Um banco de dados MongoDB, Mongo-Express, a aplicação node e a React.
 
 ---
 
