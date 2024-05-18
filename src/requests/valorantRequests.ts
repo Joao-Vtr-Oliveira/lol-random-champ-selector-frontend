@@ -1,6 +1,6 @@
 import { AgentReturn } from '@/types/agentReturn';
 
-const url = 'http://localhost/valorant';
+const url = 'http://localhost:3000/valorant';
 
 export const getAllAgents = async () => {
 	try {
