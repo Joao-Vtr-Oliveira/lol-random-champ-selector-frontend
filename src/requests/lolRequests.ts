@@ -1,7 +1,11 @@
 import { AllChampionsReturn, ChampionReturn } from '@/types/championReturn';
 import { damageTypesArray, rolesArray } from '@/utils/championInfo';
+import dotenv from 'dotenv';
 
-const url = 'http://localhost:3000';
+dotenv.config();
+
+
+const url = process.env.URL as string;
 
 export const ping = async () => {
   try {
