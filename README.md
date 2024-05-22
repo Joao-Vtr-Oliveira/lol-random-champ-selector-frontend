@@ -20,6 +20,8 @@
 
 > Esse projeto também contém uma imagem docker. E no projeto back-end, há um arquivo `YML` que faz o compose de ambos projetos. E já se é iniciado: Um banco de dados MongoDB, Mongo-Express, a aplicação node e a React.
 
+> Caso você tenha interesse em testar esse projeto, no repositório [back-end](https://github.com/Joao-Vtr-Oliveira/lol-random-champ-selector-backend) há um tutorial de como se utilizar o projeto sem instalar nada. Utilizando o `Play With Docker`.
+
 ---
 
 <div align=center>
