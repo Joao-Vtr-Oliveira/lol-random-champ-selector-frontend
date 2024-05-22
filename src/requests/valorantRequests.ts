@@ -1,10 +1,14 @@
 import { AgentReturn } from '@/types/agentReturn';
+import url from '@/utils/pickEnvVar';
+import dotenv from 'dotenv';
 
-const url = 'http://localhost:3000/valorant';
+dotenv.config();
+
+const urlValorant = `${url}/valorant`;
 
 export const getAllAgents = async () => {
 	try {
-		const response = await fetch(`${url}/getAllAgents`);
+		const response = await fetch(`${urlValorant}/getAllAgents`);
 		const data = await response.json();
 		return data as { agents: AgentReturn[] };
 	} catch (error) {
@@ -17,7 +21,7 @@ export const getRandomAgent = async ({role}: {role?: string}): Promise<AgentRetu
 		const formData = new URLSearchParams();
 		if (role) formData.append('role', role);
 
-		const response = await fetch(`${url}/getRandomAgent`, {
+		const response = await fetch(`${urlValorant}/getRandomAgent`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -39,7 +43,7 @@ export const addNewAgent = async (name: string, role: string) => {
 		formData.append('name', name);
 		formData.append('role', role);
 
-		const response = await fetch(`${url}/addNewAgent`, {
+		const response = await fetch(`${urlValorant}/addNewAgent`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -59,7 +63,7 @@ export const deleteAgent = async (agentName: string) => {
 	try {
 		const formData = new URLSearchParams();
 		formData.append('name', agentName);
-		const response = await fetch(`${url}/deleteAgent`, {
+		const response = await fetch(`${urlValorant}/deleteAgent`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',

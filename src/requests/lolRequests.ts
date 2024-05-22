@@ -1,11 +1,10 @@
 import { AllChampionsReturn, ChampionReturn } from '@/types/championReturn';
 import { damageTypesArray, rolesArray } from '@/utils/championInfo';
+import url from '@/utils/pickEnvVar';
+
 import dotenv from 'dotenv';
 
 dotenv.config();
-
-
-const url = process.env.URL as string;
 
 export const ping = async () => {
   try {
@@ -43,6 +42,7 @@ export const getRandomChampion = async ({
     if(type) formData.append('type', type);
     if(range) formData.append('ranged', range === 'ranged' ? 'true' : 'false');
     
+    console.log('URL UTILIZADA: ', url);
     const response = await fetch(`${url}/getRandomChampion/`, {
       method: 'POST',
       headers: {
