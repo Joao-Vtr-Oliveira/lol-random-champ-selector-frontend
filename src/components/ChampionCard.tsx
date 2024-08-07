@@ -57,10 +57,13 @@ const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {
 					target='_blank'
 					href={`https://www.leagueofgraphs.com/champions/builds/${champion.nameBase}`}
 				>
-					<Img
-						src={link}
-						borderRadius={10}
-					/>
+          {champion.nameBase !== '-' &&
+            <Img
+            src={link}
+            borderRadius={10}
+            _hover={{"border": "2px solid #570FA0"}}
+            />
+        }
 				</Link>
 				<Box
 					fontWeight='bold'
