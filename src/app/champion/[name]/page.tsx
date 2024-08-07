@@ -9,8 +9,22 @@ export const metadata: Metadata = {
 
 const EditChampionPage = ({ params }: PageParams) => {
 	return (
-		<Box className='flex h-5/6 flex-col items-center justify-center'>
-			<EditChampion params={params} />
+		<Box
+			display='flex'
+			flexDirection='column'
+			alignItems='center'
+			justifyContent='center'
+			minH='100vh'
+			p={[4, 6, 8]}
+		>
+			<Box
+				width={['100%', '90%', '80%', '70%']}
+				maxW='container.lg'
+				p={[2, 4]}
+				borderRadius='md'
+			>
+				<EditChampion params={params} />
+			</Box>
 		</Box>
 	);
 };

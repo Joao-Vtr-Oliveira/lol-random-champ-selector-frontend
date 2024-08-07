@@ -13,6 +13,7 @@ import {
 	Checkbox,
 	CheckboxGroup,
 	Heading,
+	Img,
 	Input,
 	Stack,
 	Tooltip,
@@ -22,6 +23,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toastHelper from '@/utils/toastHelper';
 import { rolesArray, damageTypesArray } from '@/utils/championInfo';
+import { specifChampionName } from '@/utils/specificChampioName';
 
 const EditChampion = ({ params }: PageParams) => {
 	const [champion, setChampion] = useState<ChampionReturn>();
@@ -79,7 +81,6 @@ const EditChampion = ({ params }: PageParams) => {
 		if (checkFields() !== true) return;
 		try {
 			if (!champion) return;
-			console.log(champion);
 			const data = await updateChampion(champion);
 			if (data.status !== 'OK') return toast(toastHelper('error'));
 			push('/list');
@@ -104,13 +105,38 @@ const EditChampion = ({ params }: PageParams) => {
 	if (info === 'error') return <p>Internal Error</p>;
 	if (!champion) return <p>Loading</p>;
 
+	const name = specifChampionName(champion.name);
+	const link = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`;
+
 	return (
-		<Box>
-			<Heading textAlign='center' mb={10}>
+		<Box p={[2, 4, 6]} maxW="container.lg" mx="auto">
+			<Heading
+				textAlign='center'
+				my={5}
+				fontSize={['xl', '2xl', '3xl']}
+			>
 				{champion.name}:
 			</Heading>
+			<Box
+				display='flex'
+				justifyContent='center'
+				mb={5}
+			>
+				<Img
+					src={link}
+					borderRadius={10}
+					_hover={{ border: '2px solid #570FA0' }}
+					width={['80%', '70%', '60%']}
+					height='auto'
+					objectFit='cover'
+				/>
+			</Box>
 			<Box mb={10}>
-				<Heading textAlign='center' mb={5} size='md'>
+				<Heading
+					textAlign='center'
+					mb={5}
+					fontSize={['md', 'lg']}
+				>
 					<Tooltip
 						label='How the name is in the league of graphs URL'
 						aria-label='Base Name'
@@ -124,86 +150,115 @@ const EditChampion = ({ params }: PageParams) => {
 					onChange={(e) =>
 						setChampion({ ...champion, nameBase: e.target.value })
 					}
+					size='lg'
 				/>
 			</Box>
-			<Box display='flex'>
-				<Box>
-					<Box mb={10}>
-						<Heading textAlign='center' mb={5} size='md'>
-							Roles
-						</Heading>
-						<CheckboxGroup colorScheme='green'>
-							<Stack justify='center' direction='row'>
-								{rolesArray.map((role) => (
-									<Checkbox
-										key={role}
-										isChecked={champion[role]}
-										onChange={() =>
-											setChampion({ ...champion, [role]: !champion[role] })
-										}
-									>
-										{role}
-									</Checkbox>
-								))}
-							</Stack>
-						</CheckboxGroup>
-					</Box>
-
-					<Box mb={10}>
-						<Heading textAlign='center' mb={5} size='md'>
-							Damage Type
-						</Heading>
-						<CheckboxGroup colorScheme='green'>
-							<Stack justify='center' direction='row'>
-								{damageTypesArray.map((type) => (
-									<Checkbox
-										key={type}
-										isChecked={champion[type]}
-										onChange={() =>
-											setChampion({ ...champion, [type]: !champion[type] })
-										}
-									>
-										{type}
-									</Checkbox>
-								))}
-							</Stack>
-						</CheckboxGroup>
-					</Box>
-
-					<Box
-						display='flex'
-						flexDirection='column'
-						alignItems='center'
-						mb={10}
+			<Box>
+				<Heading
+					textAlign='center'
+					mb={5}
+					fontSize={['md', 'lg']}
+				>
+					Roles
+				</Heading>
+				<CheckboxGroup colorScheme='green'>
+					<Stack
+						justify='center'
+						direction={['row']}
+						spacing={4}
 					>
-						<Heading textAlign='center' mb={5} size='md'>
-							Ranged
-						</Heading>
-						<Checkbox
-							colorScheme='green'
-							isChecked={champion.ranged}
-							onChange={() =>
-								setChampion({ ...champion, ranged: !champion.ranged })
-							}
-						>
-							Ranged
-						</Checkbox>
-					</Box>
+						{rolesArray.map((role) => (
+							<Checkbox
+								key={role}
+								isChecked={champion[role]}
+								onChange={() =>
+									setChampion({ ...champion, [role]: !champion[role] })
+								}
+							>
+								{role}
+							</Checkbox>
+						))}
+					</Stack>
+				</CheckboxGroup>
+			</Box>
 
-					<Box display='flex' justifyContent='center'>
-						<Button
-							isDisabled={!checkFieldsForInput()}
-							onClick={fetchUpdate}
-							colorScheme='green'
-							mr={5}
-						>
-							Update champion
-						</Button>
-						<Button onClick={fetchDelete} colorScheme='red'>
-							Delete champion
-						</Button>
-					</Box>
-				</Box>
+			<Box mb={10}>
+				<Heading
+					textAlign='center'
+					mb={5}
+					fontSize={['md', 'lg']}
+				>
+					Damage Type
+				</Heading>
+				<CheckboxGroup colorScheme='green'>
+					<Stack
+						justify='center'
+						direction={['row']}
+						spacing={4}
+					>
+						{damageTypesArray.map((type) => (
+							<Checkbox
+								key={type}
+								isChecked={champion[type]}
+								onChange={() =>
+									setChampion({ ...champion, [type]: !champion[type] })
+								}
+							>
+								{type}
+							</Checkbox>
+						))}
+					</Stack>
+				</CheckboxGroup>
+			</Box>
+
+			<Box
+				display='flex'
+				flexDirection='column'
+				alignItems='center'
+				mb={10}
+			>
+				<Heading
+					textAlign='center'
+					mb={5}
+					fontSize={['md', 'lg']}
+				>
+					Ranged
+				</Heading>
+				<Checkbox
+					colorScheme='green'
+					isChecked={champion.ranged}
+					onChange={() =>
+						setChampion({ ...champion, ranged: !champion.ranged })
+					}
+				>
+					Ranged
+				</Checkbox>
+			</Box>
+
+			<Box
+				display='flex'
+				flexDirection={['column', 'row']}
+				justifyContent='center'
+				alignItems='center'
+				gap={4}
+			>
+				<Button
+					isDisabled={!checkFieldsForInput()}
+					onClick={fetchUpdate}
+					colorScheme='green'
+					mr={[0, 4]}
+					mb={[4, 0]}
+					width={['100%', 'auto']}
+				>
+					Update champion
+				</Button>
+				<Button
+					onClick={fetchDelete}
+					colorScheme='red'
+					width={['100%', 'auto']}
+				>
+					Delete champion
+				</Button>
 			</Box>
 		</Box>
 	);
