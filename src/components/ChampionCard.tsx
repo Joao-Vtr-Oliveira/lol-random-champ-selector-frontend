@@ -18,7 +18,8 @@ import {
 import Link from 'next/link';
 
 const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const roles = createArray(rolesArray, champion);
+  const types = createArray(damageTypesArray, champion);
 
 	const name = specifChampionName(champion.name);
 	const link = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`;
@@ -75,13 +76,13 @@ const ChampionCard = ({ champion }: { champion: ChampionReturn }) => {
 					textAlign='center'
 					mt={2}
 				>
-					Roles: {rolesArray.join(', ')}
+					Roles: {roles.join(', ')}
 				</Box>
 				<Box
 					fontWeight='bold'
 					textAlign='center'
 				>
-					Types: {damageTypesArray.join(', ')}
+					Types: {types.join(', ')}
 				</Box>
 				<Box
 					fontWeight='bold'
