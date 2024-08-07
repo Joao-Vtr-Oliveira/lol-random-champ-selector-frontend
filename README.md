@@ -30,12 +30,10 @@
   <video controls src="https://github.com/user-attachments/assets/8e41cd00-e7b1-44da-af7a-8732d64a41ea"></video>
 
   <p style='font-size: 15px; font-weight: bold'>Tela com todos campeões</p>
-  <video controls src="https://github.com/user-attachments/assets/12a13f68-1bde-416d-ac69-12dc6e167bf3
-  "></video>
+  <video controls src="https://github.com/user-attachments/assets/98c8c785-f4a5-4cec-9306-b45a639ceb19"></video>
 
   <p style='font-size: 15px; font-weight: bold'>Tela de edição de campeão:</p>
-  <video controls src="https://github.com/user-attachments/assets/f5e0d149-2a5b-4193-89c4-a075b6203069
-  "></video>
+  <video controls src="https://github.com/user-attachments/assets/afea6344-ea98-4421-a330-e0d9cc74c4be"></video>
 
   <p style='font-size: 15px; font-weight: bold'>Tela de adicionar novo campeão:</p>
   <video controls src="https://github.com/Joao-Vtr-Oliveira/lol-random-champ-selector-frontend/assets/114768964/1d82cab2-98af-4a48-b6c6-b311a3f0bcc0"></video>
