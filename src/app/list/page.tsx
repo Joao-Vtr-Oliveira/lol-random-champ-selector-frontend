@@ -3,13 +3,13 @@ import { Box } from '@chakra-ui/react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'List of champions',
+  title: 'List of champions',
 };
 
 export default function List() {
-	return (
-		<Box className='flex min-h-screen flex-col items-center justify-center p-24'>
-			<ListComponent />
-		</Box>
-	);
+  return (
+    <Box className='flex min-h-screen flex-col items-center justify-center p-4'>
+      <ListComponent />
+    </Box>
+  );
 }
