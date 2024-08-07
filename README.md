@@ -27,13 +27,15 @@
 <div align=center>
   <p style='font-size: 25px; text-decoration: underline; font-weight: bold'>Videos de exemplo:</p>
   <p style='font-size: 15px; font-weight: bold'>Tela inicial(random champion selector):</p>
-  <video controls src="https://github.com/Joao-Vtr-Oliveira/lol-random-champ-selector-frontend/assets/114768964/fa33a209-57b3-4d0f-a1c8-e6c9ed71c20b"></video>
+  <video controls src="https://github.com/user-attachments/assets/8e41cd00-e7b1-44da-af7a-8732d64a41ea"></video>
 
   <p style='font-size: 15px; font-weight: bold'>Tela com todos campeões</p>
-  <video controls src="https://github.com/Joao-Vtr-Oliveira/lol-random-champ-selector-frontend/assets/114768964/51f69600-362b-4c24-9536-4222adaa0273"></video>
+  <video controls src="https://github.com/user-attachments/assets/12a13f68-1bde-416d-ac69-12dc6e167bf3
+  "></video>
 
   <p style='font-size: 15px; font-weight: bold'>Tela de edição de campeão:</p>
-  <video controls src="https://github.com/Joao-Vtr-Oliveira/lol-random-champ-selector-frontend/assets/114768964/15172fbf-519b-4f39-9c0b-659935a2c935"></video>
+  <video controls src="https://github.com/user-attachments/assets/f5e0d149-2a5b-4193-89c4-a075b6203069
+  "></video>
 
   <p style='font-size: 15px; font-weight: bold'>Tela de adicionar novo campeão:</p>
   <video controls src="https://github.com/Joao-Vtr-Oliveira/lol-random-champ-selector-frontend/assets/114768964/1d82cab2-98af-4a48-b6c6-b311a3f0bcc0"></video>
